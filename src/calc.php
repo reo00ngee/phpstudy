@@ -29,4 +29,3 @@ while ($i <= 3366) {
   $i++;
 }
 echo $sum2 .PHP_EOL;
-echo 'done';
