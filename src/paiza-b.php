@@ -100,52 +100,24 @@ while ($i <= $N + $M) {
 $j = 0;
 $k = 0;
 $C = array();
-while ($k <= $N) {
+while ($k < $N) {
   $C[] = 0;
   $k++;
 }
-$population = array();
-$sum = 0;
-$sum2 = 0;
-$sum3 = 0;
+$k = 0;
 
-while ($j <= $M) {
-  while ($k <= $N) {
-    if ($group[$j] - $gondola[$k] > 0) {
-      $C[$k] = $C[$k] + $gondola[$k];
-      $sum = $group[$j] - $gondola[$k];
-      $k++;
-      if ($sum - $gondola[$k] > 0) {
-        $C[$k] = $C[$k] + $gondola[$k];
-        $sum2 = $sum - $gondola[$k];
-        $k++;
-        if ($sum2 - $gondola[$k] > 0) {
-          $C[$k] = $C[$k] + $gondola[$k];
-          $sum3 = $sum2 - $gondola[$k];
-          $k++;
-        }else{
-          $C[$k] = $C[$k] + $sum2;
-          $k++;
-          if($k > $N){
-            $k = 0;
-          }
-        }
-      } else {
-        $C[$k] = $C[$k] + $sum;
-        $k++;
-        if($k > $N){
-          $k = 0;
-        }
-      }
-    } else {
-      $C[$k] = $C[$k] + $group[$j];
-      $k++;
-      if($k > $N){
-        $k = 0;
-      }
-    }
+while ($j < $M) {
+  if ($group[$j] - $gondola[$k] > 0) {
+    $C[$k] = $C[$k] + $gondola[$k];
+    $group[$j] = $group[$j] - $gondola[$k];
+  } else {
+    $C[$k] = $C[$k] + $group[$j];
+    $group[$j] = 0;
+    $j++; // グループは条件付きでシフトさせる
   }
-  $j++;
+
+  $k++; // ゴンドラは無条件にシフトさせる
+  if($k == $N) $k = 0;
 }
 
 
